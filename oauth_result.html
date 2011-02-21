@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Oauth Result</title>
+<style type="text/css" media="screen">
+    #wrapper{width:600px; margin:0 auto;}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="access-box">
+        <h1>欢迎使用 Doit.vim :)</h1>
+        <p>请将下面的代码加入到你的 vimrc 设置中：</p>
+        <pre id="vimrc">let g:doit_access_token = "<span id="token"></span>"</pre>
+    </div>
+    <div id="deny-box" style="display:none;">
+        <h1>抱歉，您拒绝了授权请求 :(</h1>
+        <p>您拒绝了 Vim 访问你在 Doit.im 中数据的授权请求。</p>
+        <p>请放心，通过 OAuth，我们无需、也无法获得您在 Doit.im 中的账户及密码信息。请您重新获取 Doit.im 的 OAuth 授权。</p>
+        <form action="oauth.html" method="get" accept-charset="utf-8">
+            <p><input type="submit" value="重新获得 Oauth 授权 &rarr;"></p>
+        </form>
+    </div>
+</div>
+
+    <script type="text/javascript">/*<![CDATA[*/
+        function $(id){return document.getElementById(id);}
+        window.onload = function(){
+            var token = location.hash.match(/\baccess_token=([0-9a-f]+)/);
+            if(token && token[1]){
+                $("token").innerHTML = token[1];
+            }else{
+                $("deny-box").style.display = "block";
+                $("access-box").style.display = "none";
+            }
+        };
+    /*]]>*/</script>
+    <!--https://openapi.doit.im/oauth/auth_result.html#access_token=%TOKEN_CODE%&scope=&state=-->
+</body>
+</html>

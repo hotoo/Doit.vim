@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="闲耘™ (hotoo.cn[AT]gmail.com)" />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<title>Vim plugin for Doit.im.</title>
+<style type="text/css" media="screen">
+    #wrapper{width:600px; margin:0 auto;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+    <h1>Doit.vim - Vim plugin for Doit.im</h1>
+    <p>
+    Doit.vim 是一个基于 Vim 的简单任务管理插件，任务内容将同步到 Doit.im。
+    </p>
+    <form action="https://openapi.doit.im/oauth/authorize" method="get" accept-charset="utf-8">
+        <input type="hidden" name="client_id" value="4d61dc92194f9951ca000013" />
+        <input type="hidden" name="redirect_uri" value="https://openapi.doit.im/oauth/auth_result.html" />
+        <input type="hidden" name="response_type" value="code" />
+
+    <p><input type="submit" value="获得 OAuth 授权 &rarr;"></p>
+    </form>
+</div>
+</body>
+</html>
