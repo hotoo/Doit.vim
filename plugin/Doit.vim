@@ -25,16 +25,8 @@ function! s:DoitGetTasks()
 
     let oldshellredir=&shellredir
     setlocal shellredir=>
-    let text = system('curl -i https://openapi.doit.im/v1/tasks -H "Authorization: OAuth ' . g:doit_access_token . '"')
+    let text = system('curl https://openapi.doit.im/v1/tasks -H "Authorization: OAuth ' . g:doit_access_token . '"')
     " remove header information.
-    let text = substitute(text, '^HTTP/1.1\s.*\n', '', '')
-    let text = substitute(text, '^Server:\s.*\n', '', '')
-    let text = substitute(text, '^Date:\s.*\n', '', '')
-    let text = substitute(text, '^Content-Type:\s.*\n', '', '')
-    let text = substitute(text, '^Connection:\s.*\n', '', '')
-    let text = substitute(text, '^Content-Length:\s.*\n', '', '')
-    let text = substitute(text, '^Set-Cookie:\s.*\n', '', '')
-    let text = substitute(text, '^Set-Cookie:\s.*\n', '', '')
 
     let &shellredir=oldshellredir
     let text = iconv(text, "utf-8", &encoding)
