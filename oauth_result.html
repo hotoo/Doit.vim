@@ -10,17 +10,46 @@
 <body>
 
 <div id="wrapper">
-    <div id="access-box">
+    <div id="loading">
+        <noscript>
+        <h1>您的浏览器没有启用 JavaScript</h1>
+        <ol>
+        <li>
+        如果同意了授权，您需要手动将地址栏中 #access_token= 之后，&amp; 之前，
+        所有 0-9 之间的数字、或 a-f 之间的字符串放到下面的表达式的双引号之间：
+        <pre>let g:doit_access_token = ""</pre>
+        例如：
+        <pre>let g:doit_access_token = "3b61ce3525219359413ec7893e7fa652ff1b9fc86a99f05dd788d8c660b1e773"</pre>
+        </li>
+        <li>
+        如果您没有同意授权，可以重新授权。
+        <form action="oauth.html" method="get" accept-charset="utf-8">
+            <p><input type="submit" value="重新授权(Oauth) &rarr;"></p>
+        </form>
+        </li>
+        </ol>
+        <hr />
+        </noscript>
+        <h1>Loading...</h1>
+        <p>请稍后。。。</p>
+    </div>
+    <div id="access-box" style="display:none;">
         <h1>欢迎使用 Doit.vim :)</h1>
         <p>请将下面的代码加入到你的 vimrc 设置中：</p>
         <pre id="vimrc">let g:doit_access_token = "<span id="token"></span>"</pre>
+        <q>
+            <p><strong>注意：</strong>请不要将这个设置公开告诉他人，这是您私人的一个重要信息，
+            请不要公开这个信息。</p>
+            <p>如果您通过 Git、SVN 或其他工具同步您的 vimrc 为公开的资源，一定要将这种账户相关的
+            信息设置在另一个独立的 vim 脚本中，并将这个脚本加入到 ignore 列表。</p>
+        </q>
     </div>
     <div id="deny-box" style="display:none;">
-        <h1>抱歉，您拒绝了授权请求 :(</h1>
-        <p>您拒绝了 Vim 访问你在 Doit.im 中数据的授权请求。</p>
-        <p>请放心，通过 OAuth，我们无需、也无法获得您在 Doit.im 中的账户及密码信息。请您重新获取 Doit.im 的 OAuth 授权。</p>
+        <h1>抱歉，您没有同意授权请求 :(</h1>
+        <p>您没有同意 Doit.vim 访问你在 Doit.im 中数据的授权请求，Doit.vim 将可能无法正常工作。</p>
+        <p>请放心，通过 OAuth，我们无需、也无法获得您在 Doit.im 中的账户及密码信息。请您重新授权。</p>
         <form action="oauth.html" method="get" accept-charset="utf-8">
-            <p><input type="submit" value="重新获得 Oauth 授权 &rarr;"></p>
+            <p><input type="submit" value="重新授权(Oauth) &rarr;"></p>
         </form>
     </div>
 </div>
@@ -31,9 +60,11 @@
             var token = location.hash.match(/\baccess_token=([0-9a-f]+)/);
             if(token && token[1]){
                 $("token").innerHTML = token[1];
+                $("access-box").style.display = "block";
+                $("loading").style.display = "none";
             }else{
                 $("deny-box").style.display = "block";
-                $("access-box").style.display = "none";
+                $("loading").style.display = "none";
             }
         };
     /*]]>*/</script>
